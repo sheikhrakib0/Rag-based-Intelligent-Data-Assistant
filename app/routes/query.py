@@ -38,7 +38,7 @@ async def ask_question(request: QueryRequest):
     query_embedding = model.encode([request.query])
 
     # Search the index for similar chunks
-    k = 5  # number of nearest neighbors to retrieve
+    k = 3  # number of nearest neighbors to retrieve
     distances, indices = index.search(np.array(query_embedding), k)
 
     # Retrieve the relevant chunks using the indices

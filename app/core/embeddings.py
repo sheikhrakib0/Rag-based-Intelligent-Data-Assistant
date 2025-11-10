@@ -58,7 +58,7 @@ def generate_embedding(text: str, file_id: str, db_path: str):
 
     # Add embeddings to the index and store metadata
     start_id = index.ntotal
-    index.add(embeddings)
+    index.add(embeddings) # type: ignore
     for i in range(len(cleaned_chunks)):
         metadata.append({
             "file_id": file_id,

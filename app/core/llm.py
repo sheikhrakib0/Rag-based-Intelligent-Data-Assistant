@@ -33,7 +33,7 @@ def get_llm_response(prompt: str) -> str:
         ]
         # get response from the model
         response = llm.invoke(messages)
-        return response.content.strip()
+        return response.content.strip() # type: ignore
     except Exception as e:
         print(f"Error generating LLM response: {e}")
         return "I'm sorry, I couldn't process your request at this time."
