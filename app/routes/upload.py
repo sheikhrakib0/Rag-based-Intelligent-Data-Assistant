@@ -1,8 +1,8 @@
 import os
 import uuid
 from fastapi import APIRouter, File, UploadFile, HTTPException
-from core.file_perser import extract_text_from_file
-from core.embedding import generate_embedding
+from ..core.file_parser import extract_text_from_file
+from ..core.embeddings import generate_embedding
 
 
 # initializing the router

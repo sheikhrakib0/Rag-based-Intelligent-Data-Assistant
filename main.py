@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI, File, UploadFile, Query
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from routes import upload, query
+from app.routes import upload, query
 
 
 
