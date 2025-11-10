@@ -1,4 +1,4 @@
-# 📘 RAG Document Assistant with FastAPI & Google Gemini
+# 📘 RAG Based Intelligent Data Assistant with FastAPI & Google Gemini
 
 A **Retrieval-Augmented Generation (RAG)** web API built using **FastAPI**, **LangChain**, and **Google Gemini**.  
 This project allows you to **upload documents**, **store their embeddings**, and **ask natural language questions** about the uploaded content.
@@ -52,8 +52,8 @@ This project allows you to **upload documents**, **store their embeddings**, and
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/rag-fastapi-gemini.git
-cd rag-fastapi-gemini
+git clone https://github.com/sheikhrakib0/Rag-based-Intelligent-Data-Assistant
+cd Rag-based-Intelligent-Data-Assistant
 
 2️⃣ Create a Virtual Environment
 python -m venv venv
