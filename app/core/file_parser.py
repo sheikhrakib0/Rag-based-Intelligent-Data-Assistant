@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import pymupdf # PyMyPDF for PDF parsing
-import fitz  # PyMuPDF
 
 def extract_text_from_file(file_path: str) -> str:
     """
@@ -38,7 +37,7 @@ def extract_text_from_pdf(file_path: str) -> str:
     """Extract text from a .pdf file using PyMuPDF."""
     pages_text = []
     try:
-        with fitz.open(file_path) as pdf:
+        with pymupdf.open(file_path) as pdf:
             for page in pdf:
                 pages_text.append(page.get_text("text"))
     except Exception as e:
