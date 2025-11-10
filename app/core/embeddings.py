@@ -33,7 +33,7 @@ def generate_embedding(text: str, file_id: str, db_path: str):
     Each chunk is associated with the provided file_id.
     """
     # Load pre-trained SentenceTransformer model
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    model = SentenceTransformer('paraphrase-MiniLM-L3-v2')
 
     # Chunk the text
     chunks = chunk_text(text)
