@@ -1,11 +1,13 @@
 import os
-import pickle
-import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
 from pydantic import BaseModel
-from app.core.llm import get_llm_response
 from fastapi import APIRouter, HTTPException
+# langchain imports
+from langchain_community.vectorstores import FAISS
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_core.documents import Document
+from typing import List
+# other imports
+from app.core.llm import get_llm_response
 
 router = APIRouter()
 
@@ -14,6 +16,9 @@ class QueryRequest(BaseModel):
     query: str
     db_path: str
 
+# embedding model
+embed_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+
 @router.post("/ask")
 async def ask_question(request: QueryRequest):
     """
@@ -21,31 +26,27 @@ async def ask_question(request: QueryRequest):
     and generating a response using a language model.
     """
     # Load the FAISS index
-    index_file = os.path.join(request.db_path, "faiss_index.bin")
-    metadata_file = os.path.join(request.db_path, "metadata.pkl")
+    #index_file = os.path.join(request.db_path, "faiss_index.bin")
 
-    if not os.path.exists(index_file) or not os.path.exists(metadata_file):
-        raise HTTPException(status_code=404, detail="FAISS index or metadata not found.")
-
-    index = faiss.read_index(index_file)
-    with open(metadata_file, "rb") as f:
-        metadata = pickle.load(f)
-
-    # Load the SentenceTransformer model
-    model = SentenceTransformer('all-MiniLM-L6-v2')
-
-    # Generate embedding for the query
-    query_embedding = model.encode([request.query])
+    try:
+        vectorstore = FAISS.load_local(
+            folder_path=request.db_path,
+            index_name="faiss_index.bin",
+            embeddings= embed_model,
+            allow_dangerous_deserialization=True
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading FAISS index: {e}")
 
     # Search the index for similar chunks
     k = 3  # number of nearest neighbors to retrieve
-    distances, indices = index.search(np.array(query_embedding), k)
+    retrirever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": k})
 
     # Retrieve the relevant chunks using the indices
+    retrieved_docs: List[Document] = retrirever.invoke(request.query)
     relevant_chunks = []
-    for idx in indices[0]:
-        if idx < len(metadata):
-            relevant_chunks.append(metadata[idx]['text'])
+    for doc in retrieved_docs:
+        relevant_chunks.append(doc.page_content)
 
     # Combine relevant chunks into a single context
     context = "\n".join(relevant_chunks)
