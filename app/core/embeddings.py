@@ -1,6 +1,5 @@
 import os
 from typing import List
-import pickle
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS

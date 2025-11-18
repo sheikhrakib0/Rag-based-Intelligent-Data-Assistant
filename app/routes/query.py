@@ -1,4 +1,3 @@
-import os
 from pydantic import BaseModel
 from fastapi import APIRouter, HTTPException
 # langchain imports
