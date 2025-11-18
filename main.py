@@ -39,7 +39,7 @@ app.include_router(query.router, prefix="/api/v1", tags=["Query"])
 @app.get("/")
 async def root():
     return {
-        "message": "Welcome to the Rag-based Data Assistant API. Use /api/v1/upload to upload documents and /api/v1/query to query them.",
+        "message": "Welcome to the Rag-based Data Assistant API. Use /api/v1/upload to upload documents and /api/v1/ask to query them.",
         "docs": "/docs",
         "status": "API is running"
     }
@@ -47,7 +47,10 @@ async def root():
 # --- Health Check Route ---
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    return {
+        "status": "healthy",
+        "message": "The Rag-based Data Assistant API is operational."
+    }
 
 
 if __name__ == "__main__":
