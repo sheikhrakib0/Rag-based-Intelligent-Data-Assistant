@@ -23,6 +23,7 @@ async def ask_question(request: QueryRequest):
     """
     Handle user query by retrieving relevant chunks from the FAISS index
     and generating a response using a language model.
+    NOTE: Use "db_path": "data/vector_db" in the request body to specify the vector database location.
     """
     # Load the FAISS index
     #index_file = os.path.join(request.db_path, "faiss_index.bin")

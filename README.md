@@ -190,10 +190,13 @@ Build a Streamlit/Next.js frontend for interaction
 
 ---
 
-## 🧑‍💻 Author:
+## 🧑‍💻 Author
 Md. Rakib Sheikh
+
 📍 Tangail, Bangladesh
+
 📧 st18056@mbstu.ac.bd
+
 🌐 sheikhrakib.netlify.app
 
 
