@@ -3,7 +3,7 @@
 A **Retrieval-Augmented Generation (RAG)** web API built using **FastAPI**, **LangChain**, and **Google Gemini**.  
 This project allows you to **upload documents**, **store their embeddings**, and **ask natural language questions** about the uploaded content. 
 
-To check out live API go to: [RAG Based Intelligent Data Assistant](https://rag-based-intelligent-data-assistant-uno2.onrender.com/docs#/)
+Check out live API: [RAG Based Intelligent Data Assistant](https://rag-based-intelligent-data-assistant-uno2.onrender.com/docs#/)
 
 ---
 
@@ -22,31 +22,55 @@ To check out live API go to: [RAG Based Intelligent Data Assistant](https://rag-
 ## 🧠 Project Structure
 
 📦 Intelligent-Data-Assistant/
+
 │
+
 ├── main.py
+
 │
+
 ├── app/
+
 │ ├── routes/
+
 │ │ ├── upload.py # Upload & process files
+
 │ │ ├── query.py # Retrieve + query Gemini
+
 │ │
+
 │ ├── core/
+
 │ │ ├── file_parser.py # Extracts text from files
+
 │ │ ├── embeddings.py # Generates and stores embeddings
+
 │ │ ├── llm.py # Gemini model via LangChain
+
 │ │
+
 │ └── init.py
+
 │
+
 ├── data/
+
 │ ├── uploads/ # Uploaded documents
+
 │ ├── vector_db/ # FAISS index + metadata
+
 │
+
 ├── .env # Contains GOOGLE_API_KEY
+
 ├── requirements.txt
+
 └── README.md
+
 |__ .gitignore
-|__ venve
-|__ test.ipynb
+
+|__ venv
+
 
 
 ---
