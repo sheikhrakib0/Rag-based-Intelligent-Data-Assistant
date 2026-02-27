@@ -19,7 +19,7 @@ async def upload_file(file: UploadFile = File(...)):
     """
     try:
         # 1. Save the file locally
-        file_id = str(uuid.uuid4())
+        file_id = str(uuid.uuid4())[:4]
         file_path = os.path.join(UPLOAD_DIRECTORY, f"{file_id}_{file.filename}")
 
         with open(file_path, "wb") as f:
@@ -33,14 +33,15 @@ async def upload_file(file: UploadFile = File(...)):
             raise HTTPException(status_code=400, detail="Failed to extract text from the uploaded file.")
         
         # 3. Generate embeddings for the extracted text and store them
-        db_path = "data/vector_db"
+        db_path = f"data/vector_db/{file_id}"
         os.makedirs(db_path, exist_ok=True)
         generate_embedding(extracted_text, file_id, db_path)
 
         return {
-            "message": "File uploaded and processed successfully.", "file_id": file_id,
-            "filename": file.filename,
-            "stored_in": file_path
+            "message": "File uploaded and processed successfully.", 
+            "file_id": file_id,
+            "db_path": db_path,
+            "filename": file.filename
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred during file upload: {str(e)}")

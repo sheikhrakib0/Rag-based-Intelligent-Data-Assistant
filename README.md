@@ -11,6 +11,7 @@ Check out live API: [RAG Based Intelligent Data Assistant](https://rag-based-int
 
 ✅ Upload and process PDF, CSV, or TXT files  
 ✅ Extract text content from documents
+
 ✅ Used Langchain Framework for this project  
 ✅ Generate vector embeddings using **Gemini Embedding Model**  
 ✅ Store and retrieve vectors using **FAISS**  
